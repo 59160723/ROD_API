@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    <script>
+        $(() => {
+            var socket = io();
+            socket.emit('studentData', {
+                name: 'Soraw ww',
+                shirt: true
+            })
+
+            socket.on('studentData', (msg) => {
+                console.log('i recive : ' + msg);
+
+            })
+        });
+    </script>
+
+    <title>Scoket io</title>
+</head>
+
+<body>
+    <center>
+        <h1>Page for Test Socket.io by Reloade page</h1>
+    </center>
+
+</body>
+
+</html>
