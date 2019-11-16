@@ -79,9 +79,9 @@ router.get('/attendance/:id', async(req, res) => {
 })
 
 router.get('/attendanceResult', async(req, res) => {
-    let subId = req.body.subId
-    let group = req.body.group
-    let term = req.body.term
+    let subId = req.query.subId
+    let group = parseInt(req.query.group)
+    let term = req.query.term
 
     let client = await MongoClient.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true }).catch((err) => {
         console.log(err)
