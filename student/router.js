@@ -78,6 +78,28 @@ router.get('/attendance/:id', async(req, res) => {
     }
 })
 
+router.get('/attendanceResult', async(req, res) => {
+    let subId = req.body.subId
+    let group = req.body.group
+    let term = req.body.term
+
+    let client = await MongoClient.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true }).catch((err) => {
+        console.log(err)
+        res.status(500).json({ error: err })
+    })
+
+    try {
+        let db = client.db('attenDB')
+        let docs = await db.collection('attendance').find({ subjectID: subId, subjectGroup: group, term: term }).toArray()
+        res.json(docs)
+    } catch (err) {
+        console.error(err)
+        res.status(500).json({ error: err })
+    } finally {
+        client.close()
+    }
+})
+
 router.get('/student/:key', async(req, res) => {
     let key = req.params.key
 
