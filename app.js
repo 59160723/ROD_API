@@ -121,4 +121,12 @@ io.on('connection', (socket) => {
     })
 })
 
+function sendLed(status) {
+    microgear.chat('Raspberry_TOP', status)
+    microgear.chat('Raspberry_Under', status)
+    console.log('SendStatus-LED:' + status);
+}
+
+module.exports.sendLed = sendLed
+
 http.listen(3000, () => console.log('start at port 3000'))

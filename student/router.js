@@ -1,4 +1,5 @@
 const express = require('express')
+const app = require('../app')
 const MongoClient = require('mongodb').MongoClient
 const ObjectID = require('mongodb').ObjectID
 const router = express.Router()
@@ -119,6 +120,13 @@ router.get('/student/:key', async(req, res) => {
     } finally {
         client.close()
     }
+})
+
+router.post('/ledStatus', async(req, res) => {
+    let status = req.body.status
+    res.json('on/off')
+    app.sendLed(status)
+    console.log(status);
 })
 
 //test send data from index.html to socket
